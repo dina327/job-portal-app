@@ -8,25 +8,34 @@ import kconvert from 'k-convert';
 import moment from 'moment';
 import JobCard from '../components/JobCard';
 import Footer from '../components/Footer';
+import { toast } from 'react-toastify';
+import axios from 'axios'
 
 
 const ApplyJobs = () => {
   const {id}=useParams()
   const [JobData,setJobData]=useState(null)
-  const {jobs}=useContext(AppContext)
+  const {jobs,backendurl}=useContext(AppContext)
   const fetchJob=async()=>{
-    const data=jobs.filter(job=>job._id===id)
-    if(data.length!==0){
-      setJobData(data[0])
-      console.log(data[0])
+    try {
+      const {data}=await axios.get(backendurl+`/api/jobs/${id}`)
+    if(data.success){
+      setJobData(data.job)
+    }else{
+      toast.error(data.message)
     }
+    }
+      
+     catch (error) {
+      toast.error(error.message)
+    }
+    
   }
   useEffect(()=>{
-    if(jobs.length>0){
-      fetchJob()
-    }
    
-  },[id,jobs])
+      fetchJob()
+   
+  },[id])
 
   return JobData? (
     <>
@@ -74,10 +83,13 @@ const ApplyJobs = () => {
           {/* Right sectio more jobs */}
           <div className='w-full lg:w-1/3 mt-8 lg:mt-0 lg:ml-8 space-y-5'>
   <h2>More jobs from {JobData.companyId.name}</h2>
-  {jobs.filter(job => job._id !== JobData._id && job.companyId._id === JobData.companyId._id)
-    .filter(job=>true).slice(0, 4)
-    .map((job, index) => <JobCard key={index} job={job} />
-    )}
+  {jobs
+  .filter(
+    job => job._id !== JobData._id && job.companyId?._id === JobData.companyId?._id
+  )
+  .slice(0, 4)
+  .map((job, index) => <JobCard key={index} job={job} />)}
+
     
 </div>
 

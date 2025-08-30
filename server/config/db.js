@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(`${process.env.MONGODB_URI}/jobPortal`, {
+    await mongoose.connect(`${process.env.MONGODB_URI}`, {
       tls: true,
       ssl: true,
       serverSelectionTimeoutMS: 5000, // quick fail if TLS fails
