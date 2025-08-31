@@ -12,6 +12,9 @@ import userRoutes from './routes/userRoutes.js';
 import { clerkMiddleware } from '@clerk/express';
 import bodyParser from 'body-parser';
 
+
+
+
 // Initialize express
 const app = express();
 
