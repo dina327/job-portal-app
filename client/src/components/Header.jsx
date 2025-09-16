@@ -13,10 +13,9 @@ const Header = () => {
       location:locationRef.current.value
     })
     setIsSearched(true)
-    console.log({
-      title:titleRef.current.value,
-      location:locationRef.current.value
-    });
+    titleRef.current.value = "";
+  locationRef.current.value = "";
+    
   }
   return (
     <div className='container 2xl:px-20 mx-auto my-10 px-4'>
@@ -32,7 +31,7 @@ const Header = () => {
           transition={{ delay: 0.3 }}
           className='text-3xl md:text-4xl font-semibold mb-4 px-2'
         >
-          Over 10,000+ jobs to apply
+          Over 1,000+ jobs to apply
         </motion.h2>
 
         <motion.p
@@ -41,7 +40,7 @@ const Header = () => {
           transition={{ delay: 0.6 }}
           className='mb-8 max-w-2xl mx-auto text-base md:text-lg font-light px-4'
         >
-          Your Next Big Career Move Starts Right Here- Explore the Best Jon Opportunities and Take the First Step Toward Your Future!
+          Your Next Big Career Move Starts Right Here- Explore the Best Job Opportunities and Take the First Step Toward Your Future!
         </motion.p>
 
         <div className='flex flex-col sm:flex-row items-stretch gap-2 bg-white rounded-xl text-gray-600 max-w-2xl mx-auto px-4 py-3 shadow-md transition hover:shadow-lg'>

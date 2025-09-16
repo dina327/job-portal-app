@@ -2,6 +2,10 @@ import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import ApplyJobs from './pages/ApplyJobs';
+import JobDetails from './pages/JobDetails.jsx';
+
+
+
 import Applications from './pages/Applications';
 import RecruiterLogin from './components/RecruiterLogin';
 import { AppContext } from './context/AppContext';
@@ -23,6 +27,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/apply-job/:id" element={<ApplyJobs />} />
+         <Route path="/job-details/:id" element={<JobDetails />} />
         <Route path="/applications" element={<Applications />} />
         <Route path="/dashboard" element={<Dashboard />}>
         {

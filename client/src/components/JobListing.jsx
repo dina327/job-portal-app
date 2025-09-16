@@ -27,20 +27,46 @@ const JobListing = () => {
         : [...prev, location]
     );
   };
+useEffect(() => {
+  const newFilteredJobs = jobs.slice().reverse().filter(job => {
+    // Normalize job data
+    const jobCategory = job.category?.toLowerCase().trim() || "";
+    const jobLocation = job.location?.toLowerCase().trim() || "";
+    const jobTitle = job.title?.toLowerCase().trim() || "";
 
-  useEffect(() => {
-    const matchesCategory = job => selectedCategories.length === 0 || selectedCategories.includes(job.category);
-    const matchesLocation = job => selectedLocations.length === 0 || selectedLocations.includes(job.location);
-    const matchesTitle = job => searchFilter.title === "" || job.title.toLowerCase().includes(searchFilter.title.toLowerCase());
-    const matchesSearchLocation = job => searchFilter.location === "" || job.location.toLowerCase().includes(searchFilter.location.toLowerCase());
+    // Normalize selected filters
+    const selectedCategoriesNormalized = selectedCategories.map(c => c.toLowerCase().trim());
+    const selectedLocationsNormalized = selectedLocations.map(l => l.toLowerCase().trim());
 
-    const newFilteredJobs = jobs.slice().reverse().filter(
-      job => matchesCategory(job) && matchesLocation(job) && matchesTitle(job) && matchesSearchLocation(job)
-    );
+    // Category match (checkbox)
+    const matchesCategory =
+      selectedCategoriesNormalized.length === 0 ||
+      selectedCategoriesNormalized.includes(jobCategory);
 
-    setFilteredJobs(newFilteredJobs);
-    setCurrentPage(1);
-  }, [jobs, selectedCategories, selectedLocations, searchFilter]);
+    // Location match (checkbox)
+    const matchesLocation =
+      selectedLocationsNormalized.length === 0 ||
+      selectedLocationsNormalized.includes(jobLocation);
+
+    // Search input (matches title OR category OR location)
+    const matchesSearchInput =
+      searchFilter.title === "" ||
+      jobTitle.includes(searchFilter.title.toLowerCase().trim()) ||
+      jobCategory.includes(searchFilter.title.toLowerCase().trim()) ||
+      jobLocation.includes(searchFilter.title.toLowerCase().trim());
+
+    // Location search input (extra check from your original code)
+    const matchesSearchLocation =
+      searchFilter.location === "" ||
+      jobLocation.includes(searchFilter.location.toLowerCase().trim());
+
+    return matchesCategory && matchesLocation && matchesSearchInput && matchesSearchLocation;
+  });
+
+  setFilteredJobs(newFilteredJobs);
+  setCurrentPage(1);
+}, [jobs, selectedCategories, selectedLocations, searchFilter]);
+
 
   return (
     <div className='container 2xl:px-20 mx-auto flex flex-col lg:flex-row max-lg:space-y-8 py-8'>

@@ -30,8 +30,8 @@ const Dashboard = () => {
         <div className="px-5 flex justify-between items-center">
           <img
             onClick={() => navigate('/')}
-            className="max-sm:w-32 cursor-pointer"
-            src={assets.logo2}
+            className="max-sm:w-40 h-35 cursor-pointer"
+            src={assets.logo5}
             alt=""
           />
           {companyData && (

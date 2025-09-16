@@ -74,10 +74,10 @@ const ManageJobs = () => {
                 <tbody>
                     {jobs.map((job,index)=>(
                       <tr className='text-gray-700' key={index}>
-                        <td className='py-2 px-4 border-b max-sm:hideen'>{index+1}</td>
+                        <td className='py-2 px-4 border-b max-sm:hidden'>{index+1}</td>
                         <td className='py-2 px-4 border-b'>{job.title}</td>
-                        <td className='py-2 px-4 border-b max-sm:hideen'>{moment(job.date).format('ll')}</td>
-                        <td className='py-2 px-4 border-b max-sm:hideen'>{job.location}</td>
+                        <td className='py-2 px-4 border-b max-sm:hidden'>{moment(job.date).format('ll')}</td>
+                        <td className='py-2 px-4 border-b max-sm:hidden'>{job.location}</td>
                         <td className='py-2 px-4 border-b text-center'>{job.applicants}</td>
                         <td>
                             <input onChange={()=>changeJobVisiblity(job._id)} className='scale-125 ml-4' type="checkbox"  checked={job.visible}/>

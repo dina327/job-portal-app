@@ -30,6 +30,9 @@ import addIcon from "./addicon.webp";
 import homeIcon from "./homeicon.webp";
 import personTick from "./person-tick-icon.webp";
 import downloadIcon from "./downloadIcon.webp";
+import logo3 from "./logo3.avif";
+import logo4 from "./logo4.jpg";
+import logo5 from "./logo5.jpg"
 
 // Assets export
 export const assets = {
@@ -64,7 +67,9 @@ export const assets = {
   homeIcon,
   personTick,
   downloadIcon,
-
+  logo3,
+  logo4,
+  logo5
 
 };
 
@@ -84,9 +89,9 @@ export const jobLocations = [
   "Megenagna",
   "Mexico",
   "Bole",
-  "Abado",
-  "Kaliti",
-  "Diredawa",
+  "Gerji",
+  "Piasa",
+  "CMC",
 ];
 
 // Jobs data

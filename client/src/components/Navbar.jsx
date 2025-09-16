@@ -25,9 +25,9 @@ const Navbar = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.4 }}
-          src={assets.logo2}
+          src={assets.logo5}
           alt="Job Portal Logo"
-          className='w-28 h-28 object-contain max-sm:w-20 ml-0 cursor-pointer'
+          className='w-40 h-35 object-contain max-sm:w-20 ml-0 cursor-pointer'
           onClick={()=>navigate('/')}
         />
 
