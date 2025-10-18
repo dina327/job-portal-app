@@ -84,10 +84,9 @@ export const getCompanyData=async(req,res)=>{
 }
 //post new job
 export const postJob = async (req, res) => {
-  const { title, description, location, salary, category, level } = req.body; // include category, level
+  const { title, description, location, salary, category, level } = req.body; 
   const companyId = req.company._id;
 
-  console.log(companyId, { title, description, location, salary, level, category });
 
   try {
     const newJob = new Job({
@@ -97,7 +96,7 @@ export const postJob = async (req, res) => {
       salary,
       category,
       level,
-     companyId,   // also note: your schema uses `CompanyId`, not `companyId`
+     companyId,   
       date: Date.now(),
     });
 
@@ -111,11 +110,11 @@ export const postJob = async (req, res) => {
 //get company job applicants
 export const getCompanyJobApplicants=async(req,res)=>{
   try {
-    const companyId=req.company._id
+    const companyId=req.company._id //ensures only an authenticated company can fetch their job applicants
     //find job applications for the user and populated related data
     const applications=await JobApplication.find(({companyId}))
-    .populate('userId','name image resume')
-    .populate('jobId','title location category level salary')
+    .populate('userId','name image resume') //replaces userId (just an ObjectId) with the actual user’s details (but only name, image, resume).
+    .populate('jobId','title location category level salary')  
     .exec()
     return res.json({success:true, applications})
   } catch (error) {
