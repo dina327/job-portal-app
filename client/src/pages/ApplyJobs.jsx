@@ -109,7 +109,7 @@ const ApplyJobs = () => {
                   </span>
                   <span className="flex items-center gap-1">
                     <img className="h-6" src={assets.personIcon} alt="" />
-                    {jobData?.internshipType}
+                    {jobData?.duration}
                   </span>
                   <span className="flex items-center gap-1">
                     <img className="h-6" src={assets.moneyIcon} alt="" />
