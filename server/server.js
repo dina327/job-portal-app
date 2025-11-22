@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import * as Sentry from "@sentry/node";
 import { clerkWebhooks } from './controllers/webhooks.js';
 import companyRoutes from './routes/companyRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 import connectCloudinary from './config/cloudinary.js';
 import jobRoutes from './routes/jobRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -42,6 +43,7 @@ app.get("/debug-sentry", function mainHandler(req, res) {
 app.use('/api/company', companyRoutes);
 app.use('/api/jobs', jobRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Port (Render provides process.env.PORT)
 const PORT = process.env.PORT || 5000;

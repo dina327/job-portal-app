@@ -9,27 +9,56 @@ function AddJob() {
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('Megenagna');
   const [category, setCategory] = useState('programming');
-  const [level, setLevel] = useState('Beginner level');
-  const [salary, setSalary] = useState(0);
+
+  const [internshipType, setInternshipType] = useState('On-site');
+  const [paymentType, setPaymentType] = useState('Unpaid'); // renamed
+  const [paymentAmount, setPaymentAmount] = useState('');    // renamed
+
+  const [duration, setDuration] = useState('');
+  const [deadline, setDeadline] = useState('');
 
   const editorRef = useRef(null);
   const quillRef = useRef(null);
+
   const { backendurl, companyToken } = useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
     try {
       const description = quillRef.current.root.innerHTML;
+
+      // If internship is Paid, payment amount becomes required
+      if (paymentType === "Paid" && !paymentAmount) {
+        toast.error("Please enter the payment amount.");
+        return;
+      }
+
       const { data } = await axios.post(
         backendurl + '/api/company/post-job',
-        { title, description, location, salary, category, level },
+        {
+          title,
+          description,
+          location,
+          category,
+
+          internshipType,
+          paymentType,
+          paymentAmount:
+            paymentType === "Paid" ? Number(paymentAmount) : 0,
+
+          duration,
+         applicationDeadline: new Date(deadline)
+        },
         { headers: { token: companyToken } }
       );
 
       if (data.success) {
         toast.success(data.message);
         setTitle('');
-        setSalary(0);
+        setDuration('');
+        setDeadline('');
+        setPaymentAmount('');
         quillRef.current.root.innerHTML = '';
       } else {
         toast.error(data.message);
@@ -40,7 +69,6 @@ function AddJob() {
   };
 
   useEffect(() => {
-    // Initiate Quill only once
     if (!quillRef.current && editorRef.current) {
       quillRef.current = new Quill(editorRef.current, {
         theme: 'snow',
@@ -53,9 +81,9 @@ function AddJob() {
       onSubmit={onSubmitHandler}
       className='container p-4 flex flex-col w-full items-start gap-3'
     >
-      {/* Job Title */}
+      {/* Internship Title */}
       <div className='w-full'>
-        <p className='mb-2'>Job Title</p>
+        <p className='mb-2'>Internship Title</p>
         <input
           type="text"
           placeholder='Type here'
@@ -66,17 +94,17 @@ function AddJob() {
         />
       </div>
 
-      {/* Job Description */}
+      {/* Description */}
       <div className='w-full max-w-lg'>
-        <p className='my-2'>Job Description</p>
+        <p className='my-2'>Internship Description</p>
         <div ref={editorRef}></div>
       </div>
 
-      {/* Category, Location, Level */}
+      {/* Category + Location + Internship Type */}
       <div className='flex flex-col sm:flex-row gap-2 w-full sm:gap-8'>
         {/* Category */}
         <div>
-          <p className='mb-2'>Job Category</p>
+          <p className='mb-2'>Category</p>
           <select
             className='w-full px-3 py-2 border-2 border-gray-300 rounded'
             onChange={e => setCategory(e.target.value)}
@@ -90,7 +118,7 @@ function AddJob() {
 
         {/* Location */}
         <div>
-          <p className='mb-2'>Job Location</p>
+          <p className='mb-2'>Location</p>
           <select
             className='w-full px-3 py-2 border-2 border-gray-300 rounded'
             onChange={e => setLocation(e.target.value)}
@@ -102,30 +130,76 @@ function AddJob() {
           </select>
         </div>
 
-        {/* Level */}
+        {/* Internship Type */}
         <div>
-          <p className='mb-2'>Job Level</p>
+          <p className='mb-2'>Internship Type</p>
           <select
             className='w-full px-3 py-2 border-2 border-gray-300 rounded'
-            onChange={e => setLevel(e.target.value)}
-            value={level}
+            value={internshipType}
+            onChange={e => setInternshipType(e.target.value)}
           >
-            <option value="Beginner level">Beginner level</option>
-            <option value="Intermediate level">Intermediate level</option>
-            <option value="Senior level">Senior level</option>
+            <option value="On-site">On-site</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
           </select>
         </div>
       </div>
 
-      {/* Salary */}
+      {/* Payment Type */}
+      <div className='flex flex-col sm:flex-row gap-6'>
+        <div>
+          <p className='mb-2'>Payment Type</p>
+          <select
+            className='w-full px-3 py-2 border-2 border-gray-300 rounded'
+            value={paymentType}
+            onChange={e => { 
+              setPaymentType(e.target.value); 
+              if (e.target.value === "Unpaid") setPaymentAmount('');
+            }}
+          >
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+          </select>
+        </div>
+
+        {/* Payment Amount */}
+        {paymentType === "Paid" && (
+          <div>
+            <p className='mb-2'>Payment Amount</p>
+            <input
+              type="number"
+              min="0"
+              placeholder='1000'
+              value={paymentAmount}
+              onChange={e => setPaymentAmount(e.target.value)}
+              className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]'
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Duration */}
       <div>
-        <p className='mb-2'>Job Salary</p>
+        <p className='mb-2'>Duration</p>
         <input
-          min={0}
-          className='w-full px-3 py-2 border-2 border-gray-300 rounded sm:w-[120px]'
-          onChange={e => setSalary(e.target.value)}
-          type="number"
-          placeholder='2500'
+          type="text"
+          placeholder='e.g., 2 months'
+          value={duration}
+          onChange={e => setDuration(e.target.value)}
+          required
+          className='w-full px-3 py-2 border-2 border-gray-300 rounded'
+        />
+      </div>
+
+      {/* Application Deadline */}
+      <div>
+        <p className='mb-2'>Application Deadline</p>
+        <input
+          type="date"
+          value={deadline}
+          onChange={e => setDeadline(e.target.value)}
+          required
+          className='w-full px-3 py-2 border-2 border-gray-300 rounded'
         />
       </div>
 

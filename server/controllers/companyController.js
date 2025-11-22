@@ -84,20 +84,33 @@ export const getCompanyData=async(req,res)=>{
 }
 //post new job
 export const postJob = async (req, res) => {
-  const { title, description, location, salary, category, level } = req.body; 
-  const companyId = req.company._id;
+  const {
+    title,
+    description,
+    location,
+    category,
+    internshipType,
+    paymentType,
+    paymentAmount,
+    duration,
+    applicationDeadline
+  } = req.body;
 
+  const companyId = req.company._id;
 
   try {
     const newJob = new Job({
       title,
       description,
       location,
-      salary,
       category,
-      level,
-     companyId,   
-      date: Date.now(),
+      internshipType,
+      paymentType,
+      paymentAmount: paymentType === "Paid" ? Number(paymentAmount) : 0,
+      duration,
+      applicationDeadline: new Date(applicationDeadline), // convert string to Date
+      companyId,
+      datePosted: Date.now(),
     });
 
     await newJob.save();
@@ -106,6 +119,7 @@ export const postJob = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
 
 //get company job applicants
 export const getCompanyJobApplicants=async(req,res)=>{
