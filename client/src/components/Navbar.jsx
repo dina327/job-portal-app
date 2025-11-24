@@ -16,21 +16,20 @@ const Navbar = () => {
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className='shadow-md py-10 bg-white top-0 z-50'
+      className='shadow-md py-4 bg-white top-0 z-50'
     >
       <div className='w-full flex justify-between items-center px-2 sm:px-4 xl:px-20'>
 
         {/* Logo */}
-        <motion.h1
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.2, duration: 0.4 }}
-  className="text-2xl sm:text-xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-500 to-pink-500 cursor-pointer select-none"
-  onClick={() => navigate('/')}
->
-  InternPortal
-</motion.h1>
-
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+          src={assets.logo5}
+          alt="Job Portal Logo"
+          className='w-40 h-35 object-contain max-sm:w-20 ml-0 cursor-pointer'
+          onClick={()=>navigate('/')}
+        />
 
         {/* Conditional Buttons or User Info */}
         {user ? (
@@ -39,7 +38,7 @@ const Navbar = () => {
               to='/applications'
               className='text-sm text-gray-700 hover:text-emerald-600 transition duration-300 hover:underline font-medium'
             >
-              Applied Internships
+              Applied Jobs
             </Link>
             <p className='text-gray-800 text-sm font-medium'>
               Hi, <span className='text-blue-600'>{user.firstName + ' ' + user.lastName}</span>

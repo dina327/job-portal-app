@@ -64,7 +64,7 @@ const ManageJobs = () => {
                 <thead>
                     <tr>
                         <th className='p-2 px-4 border-b text-left max-sm:hidden'>#</th>
-                        <th className='p-2 px-4 border-b text-left'>Internship Title</th>
+                        <th className='p-2 px-4 border-b text-left'>Job Title</th>
                         <th className='p-2 px-4 border-b text-left max-sm:hidden'>Date</th>
                         <th className='p-2 px-4 border-b text-left max-sm:hidden'>Location</th>
                         <th className='p-2 px-4 border-b text-center'>Applicants</th>

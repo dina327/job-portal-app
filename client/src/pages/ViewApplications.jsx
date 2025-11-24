@@ -59,7 +59,7 @@ const ViewApplications = () => {
                     <tr className='border-b'>
                         <th className='py-2 px-4 text-left'>#</th>
                         <th className='py-2 px-4 text-left'>User name</th>
-                        <th className='py-2 px-4 text-left max-sm:hidden'>Internship Title</th>
+                        <th className='py-2 px-4 text-left max-sm:hidden'>Job Title</th>
                         <th className='py-2 px-4 text-left max-sm:hidden'>Location</th>
                         <th className='py-2 px-4 text-left'>Resume</th>
                         <th className='py-2 px-4 text-left'>Action</th>

@@ -23,7 +23,7 @@ const Header = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className='bg-linear-to-r from-purple-700 to-purple-900 text-white py-16 text-center rounded-2xl shadow-lg'
+        className='bg-gradient-to-r from-purple-700 to-purple-900 text-white py-16 text-center rounded-2xl shadow-lg'
       >
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -31,7 +31,7 @@ const Header = () => {
           transition={{ delay: 0.3 }}
           className='text-3xl md:text-4xl font-semibold mb-4 px-2'
         >
-          Over 1,000+ Internships to apply
+          Over 1,000+ jobs to apply
         </motion.h2>
 
         <motion.p
@@ -40,7 +40,7 @@ const Header = () => {
           transition={{ delay: 0.6 }}
           className='mb-8 max-w-2xl mx-auto text-base md:text-lg font-light px-4'
         >
-          Kickstart Your Career with the Best Internships – Discover Opportunities, Gain Experience, and Take Your First Step Toward a Brighter Future!
+          Your Next Big Career Move Starts Right Here- Explore the Best Job Opportunities and Take the First Step Toward Your Future!
         </motion.p>
 
         <div className='flex flex-col sm:flex-row items-stretch gap-2 bg-white rounded-xl text-gray-600 max-w-2xl mx-auto px-4 py-3 shadow-md transition hover:shadow-lg'>
@@ -52,7 +52,7 @@ const Header = () => {
             />
             <input
               type="text"
-              placeholder='Search internship (e.g. marketing)'
+              placeholder='Search job (e.g. Web Development)'
               className='p-2 rounded outline-none w-full text-sm'
               ref={titleRef}
             />
@@ -66,7 +66,7 @@ const Header = () => {
             />
             <input
               type="text"
-              placeholder='Location (e.g. Megenagna)'
+              placeholder='Location (e.g. Addis Ababa)'
               className='p-2 rounded outline-none w-full text-sm'
               ref={locationRef}
             />

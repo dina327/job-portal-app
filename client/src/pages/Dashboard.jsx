@@ -28,9 +28,12 @@ const Dashboard = () => {
       {/* Navbar for recruiter panel */}
       <div className="shadow py-4">
         <div className="px-5 flex justify-between items-center">
-          <h1 className="text-2xl sm:text-xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-500 to-pink-500 cursor-pointer select-none" onClick={() => navigate('/')}> InternPortal</h1>
- 
- 
+          <img
+            onClick={() => navigate('/')}
+            className="max-sm:w-40 h-35 cursor-pointer"
+            src={assets.logo5}
+            alt=""
+          />
           {companyData && (
             <div className="flex items-center gap-3">
               <p className="max-sm:hidden">Welcome, {companyData.name}</p>
@@ -62,7 +65,7 @@ const Dashboard = () => {
               to={'/dashboard/add-job'}
             >
               <img className="h-10 min-w-4" src={assets.addIcon} alt="" />
-              <p className="max-sm:hidden">Add Internships</p>
+              <p className="max-sm:hidden">Add Job</p>
             </NavLink>
 
             <NavLink
@@ -74,7 +77,7 @@ const Dashboard = () => {
               to={'/dashboard/manage-jobs'}
             >
               <img className="h-10 min-w-4" src={assets.homeIcon} alt="" />
-              <p className="max-sm:hidden">Manage Internships</p>
+              <p className="max-sm:hidden">Manage Jobs</p>
             </NavLink>
 
             <NavLink
